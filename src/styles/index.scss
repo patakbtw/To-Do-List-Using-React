@@ -1,0 +1,12 @@
+@import url('./nullStyle.scss');
+$darkest: rgb(53, 47, 68);
+$dark: rgb(92, 84, 112);
+$grey: rgb(185, 180, 199);
+$light: rgb(250, 240, 230);
+
+
+body {
+ background-color: $darkest;
+ font-family: 'Rubik';
+}
+

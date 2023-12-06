@@ -1,0 +1,61 @@
+$darkest: rgb(53, 47, 68);
+$dark: rgb(92, 84, 112);
+$grey: rgb(185, 180, 199);
+$light: rgb(250, 240, 230);
+
+
+.tdl {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 33%;
+        height: 100vh;
+        border: 2px solid $grey;
+        border-radius: 10px;
+        padding: 5px;
+    }
+    
+    &__form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    &__label {
+      font-weight: 800;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      color: $light;
+      align-self: center;
+    }
+  
+    &__input {
+      height: 40px;
+      border: 3px solid $dark;
+      border-radius: 6px;
+      background-color: $grey;
+      font-weight:500;
+      font-size: 1.8em;
+      color: $darkest;
+      padding: 5px;
+    }
+  
+    &__btn {
+      height: 40px;
+      width: 80px;
+      border: 3px solid $dark;
+      background-color: $grey;
+      color: $darkest;
+      font-weight:700;
+      font-size: 23px;
+      border-radius: 10px;
+    }
+
+    &__separator {
+        color: $light;
+        width: 100%;
+        size: 2px;
+    }
+  }

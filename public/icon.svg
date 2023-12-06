@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" width="16px" height="16px">
+    <g id="Layer_2"></g>
+    <g id="Layer_1">
+        <polyline style="fill:none;stroke:#ffffff;stroke-linecap:square;stroke-miterlimit:10;" points="12.5,3.5 6.5,9.5 4.5,7.5 "/>
+        <path d="M12.863,6.261c0.096,0.433,0.148,0.883,0.135,1.346c-0.084,3.032-2.62,5.429-5.651,5.345s-5.429-2.619-5.345-5.651c0.084-3.032,2.62-5.429,5.651-5.345c0.993,0.028,1.915,0.322,2.707,0.807l0.747-0.706c-0.984-0.66-2.156-1.065-3.426-1.1c-3.583-0.1-6.578,2.734-6.678,6.317s2.734,6.578,6.317,6.678c3.583,0.1,6.578-2.734,6.678-6.317c0.021-0.751-0.094-1.474-0.311-2.153" style="fill:#ffffff;stroke:#ffffff;stroke-linecap:square;stroke-miterlimit:10;"/>
+    </g>
+</svg>
