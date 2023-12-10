@@ -58,4 +58,46 @@ $light: rgb(250, 240, 230);
         width: 100%;
         size: 2px;
     }
+
+    &__list {
+      padding: 0 5px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto ;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      border-bottom: 2px solid $dark;
+      width: 100%;
+      height: 30px;
+      align-items: center;
+      padding: 15px 3px;
+      user-select: none;
+    }
+
+    &__item:nth-last-child(1){
+      border-bottom: none;
+    }
+
+    &__chkbox {
+
+    }
+    
+    &__task {
+      font-size: 1.5rem;
+      word-break: break-all;
+      color: $grey;
+    }
+
+    &__dlt {
+      background: none;
+      height: 24px;
+      margin-left: auto;
+      & > img {
+        z-index: 10;
+      }
+    }
   }
