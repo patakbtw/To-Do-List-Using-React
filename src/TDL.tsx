@@ -1,32 +1,28 @@
-import '/styles/TDL.scss'
-import React, { useState } from 'react';
-import trash from '/public/trash.svg';
+import "./styles/TDL.scss";
+import React, { useState } from "react";
 
 type FormProps = {
-  onHandleSubmit: (array: JSX.Element[]) => void;
-}
-
-
-
+  // You also can use type like this React.Dispatch<React.SetStateAction<string[]>>
+  onHandleSubmit: (array: (state: string[]) => string[]) => void;
+};
 
 const TDL_form = (props: FormProps) => {
-  const [taskList, setTaskList] = useState<JSX.Element[]>([]);
   const [textInput, setTextInput] = useState<string>("");
-  const {onHandleSubmit} = props;
+  const { onHandleSubmit } = props;
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextInput(e.target.value)
+    setTextInput(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (textInput) {
-      onHandleSubmit((prevTaskList:JSX.Element[]) => [
-        ...prevTaskList,
-        TDL_li(textInput) as JSX.Element,
-      ])
-    };
-    setTextInput('');
+      // the main issue is a different type of arguments in ptops and here\
+      // in type definition in props (line 5) you have function file this function(array) {}
+      // but here you have a function like this function(function(oldState) {...}){}
+      onHandleSubmit((prevTaskList: string[]) => [...prevTaskList, textInput]);
+    }
+    setTextInput("");
   };
 
   return (
@@ -39,7 +35,7 @@ const TDL_form = (props: FormProps) => {
         id="item"
         className="tdl__input"
         value={textInput}
-        onChange = {handleInput}
+        onChange={handleInput}
       />
       <button type="submit" className="tdl__btn">
         Add
@@ -48,31 +44,38 @@ const TDL_form = (props: FormProps) => {
   );
 };
 
-const TDL_li = (task: string): JSX.Element => {
+const TDL_li = (task: string, index: number): JSX.Element => {
+  // Line 50. key should be stable across renders https://react.dev/learn/rendering-lists#rules-of-keys
   const newId = Math.random().toString(36);
   return (
-    <li className="tdl__item" key={newId}>
-      <input type="checkbox" className="tdl__chkbox" id={newId} />
-      <label htmlFor={newId} className="tdl__task">
+    <li className="tdl__item" key={task}>
+      <input type="checkbox" className="tdl__chkbox" id={`${newId}_${index}`} />
+      <label htmlFor={`${newId}_${index}`} className="tdl__task">
         {task}
       </label>
       <button className="tdl__dlt">
-        <img src={trash} alt="" />
+        <img alt="" />
       </button>
     </li>
   );
 };
 
 function TDL() {
-  const [someList, setSomeList] = useState<JSX.Element[]>([]);
-
+  // also it is better do not store JSX Elements in the state. Plain strings are better (and easier to maintain)
+  const [someList, setSomeList] = useState<string[]>([]);
 
   return (
     <>
       <div className="tdl__wrapper">
-        <TDL_form onHandleSubmit={setSomeList}/>
+        <TDL_form onHandleSubmit={setSomeList} />
         <hr className="tdl__separator" />
-        <ul className="tdl__list">{someList.map((task: any) => task)}</ul>
+        <ul className="tdl__list">
+          {
+            // Look how you can do https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#syntax
+            // pass function as a callback
+            someList.map(TDL_li)
+          }
+        </ul>
       </div>
     </>
   );
