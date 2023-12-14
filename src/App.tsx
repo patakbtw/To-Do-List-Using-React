@@ -19,9 +19,6 @@ const ToDoList_form = (props: FormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (textInput) {
-      // the main issue is a different type of arguments in ptops and here
-      // in type definition in props (line 5) you have function file this function(array) {}
-      // but here you have a function like this function(function(oldState) {...}){}
       onHandleSubmit((prevTaskList: string[]) => [...prevTaskList, textInput]);
     }
     setTextInput("");
@@ -46,47 +43,53 @@ const ToDoList_form = (props: FormProps) => {
   );
 };
 
-const ToDoList_delete = (index:number, onHandleSubmit = 0) => {
-  console.log(index)
-  return(
-    <button className="toDoList__dlt">
-      <img src={trash} alt="" />
-    </button>
-  );
-}
+type ToDoList_liProps = {
+  task: string,
+  index: number,
+  items: string[],
+  removeItem: (id: number) => void // Исправлено: указан тип параметра id
+};
 
-const ToDoList_li = (task: string, index: number): JSX.Element => {
-  // Line 50. key should be stable across renders https://react.dev/learn/rendering-lists#rules-of-keys
-  const newId = Math.random().toString(36);
-
-
+const ToDoList_li = (props: ToDoList_liProps): JSX.Element => {
   return (
-    <li className="toDoList__item" key={task}>
-      <input type="checkbox" className="toDoList__chkbox" id={`${newId}_${index}`} />
-      <label htmlFor={`${newId}_${index}`} className="toDoList__task">
-        {task}
-      </label>
-    <ToDoList_delete index={index}/>
-    </li>
+    <>{props.items.map((item, index) => (  // Исправлено: добавлено указание на items из props
+      <li className="toDoList__item" key={index}>
+        <input type="checkbox" className="toDoList__chkbox" id={`${props.index}`} />
+        <label htmlFor={`${props.index}`} className="toDoList__task">
+          {item} {/* Исправлено: выводим значение item */}
+        </label>
+        <button className="toDoList__dlt" onClick={() => props.removeItem(props.index)}>
+          {/* Исправлено: передаем props.index вместо item.id */}
+          <img src={trash} alt="" />
+        </button>
+      </li>
+    ))}
+    </>
   );
 };
 
 function App() {
   const [someList, setSomeList] = useState<string[]>([]);
 
+  const removeItem = (id: number) => {
+    setSomeList((prevTaskList: string[]) => prevTaskList.filter((_, index) => index !== id));
+    // Исправлено: используем filter для удаления элемента по индексу
+  };
+
   return (
     <>
       <div className="toDoList__wrapper">
-        <ToDoList_form onHandleSubmit={setSomeList} />
+				<ToDoList_form onHandleSubmit={setSomeList} />
         <hr className="toDoList__separator" />
         <ul className="toDoList__list">
-          {
-            someList.map(ToDoList_li)
-          }
+          <ToDoList_li items={someList} task="" index={0} removeItem={removeItem} />
+          {/* Исправлено: передаем значения для task и index */}
         </ul>
       </div>
     </>
   );
 }
 
+
 export default App;
+
