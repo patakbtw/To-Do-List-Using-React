@@ -24,19 +24,20 @@ const ToDoList_form = (props: FormProps) => {
     setTextInput("");
   };
 
+
   return (
-    <form className="toDoList__form" name="task-form" onSubmit={handleSubmit}>
-      <label htmlFor="item" className="toDoList__label">
+    <form className="to-do-list__form" name="task-form" onSubmit={handleSubmit}>
+      <label htmlFor="item" className="to-do-list__label">
         New task
       </label>
       <input
         type="text"
         id="item"
-        className="toDoList__input"
+        className="to-do-list__input"
         value={textInput}
         onChange={handleInput}
       />
-      <button type="submit" className="toDoList__btn">
+      <button type="submit" className="to-do-list__btn">
         Add
       </button>
     </form>

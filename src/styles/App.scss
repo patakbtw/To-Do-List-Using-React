@@ -4,7 +4,7 @@ $grey: rgb(185, 180, 199);
 $light: rgb(250, 240, 230);
 
 
-.toDoList {
+.to-do-list {
     &__wrapper {
         display: flex;
         flex-direction: column;
@@ -83,7 +83,7 @@ $light: rgb(250, 240, 230);
     }
 
     &__chkbox {
-
+      background-color: $grey;
     }
     
     &__task {
