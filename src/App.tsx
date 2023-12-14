@@ -19,54 +19,53 @@ const ToDoList_form = (props: FormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (textInput) {
-      // the main issue is a different type of arguments in ptops and here
-      // in type definition in props (line 5) you have function file this function(array) {}
-      // but here you have a function like this function(function(oldState) {...}){}
       onHandleSubmit((prevTaskList: string[]) => [...prevTaskList, textInput]);
     }
     setTextInput("");
   };
 
+
   return (
-    <form className="toDoList__form" name="task-form" onSubmit={handleSubmit}>
-      <label htmlFor="item" className="toDoList__label">
+    <form className="to-do-list__form" name="task-form" onSubmit={handleSubmit}>
+      <label htmlFor="item" className="to-do-list__label">
         New task
       </label>
       <input
         type="text"
         id="item"
-        className="toDoList__input"
+        className="to-do-list__input"
         value={textInput}
         onChange={handleInput}
       />
-      <button type="submit" className="toDoList__btn">
+      <button type="submit" className="to-do-list__btn">
         Add
       </button>
     </form>
   );
 };
 
-const ToDoList_delete = (index:number, onHandleSubmit = 0) => {
-  console.log(index)
+const ToDoList_delete = () => {
+
+  const handleDelete = () => {
+    console.log('yuppie')
+
+  }
+
   return(
-    <button className="toDoList__dlt">
+    <button className="to-do-list__dlt" onClick={handleDelete}>
       <img src={trash} alt="" />
     </button>
   );
 }
 
 const ToDoList_li = (task: string, index: number): JSX.Element => {
-  // Line 50. key should be stable across renders https://react.dev/learn/rendering-lists#rules-of-keys
-  const newId = Math.random().toString(36);
-
-
   return (
-    <li className="toDoList__item" key={task}>
-      <input type="checkbox" className="toDoList__chkbox" id={`${newId}_${index}`} />
-      <label htmlFor={`${newId}_${index}`} className="toDoList__task">
+    <li className="to-do-list__item" key={index}>
+      <input type="checkbox" className="to-do-list__chkbox" id={`${index}`} />
+      <label htmlFor={`${index}`} className="to-do-list__task">
         {task}
       </label>
-    <ToDoList_delete index={index}/>
+      <ToDoList_delete />
     </li>
   );
 };
@@ -76,10 +75,10 @@ function App() {
 
   return (
     <>
-      <div className="toDoList__wrapper">
+      <div className="to-do-list__wrapper">
         <ToDoList_form onHandleSubmit={setSomeList} />
-        <hr className="toDoList__separator" />
-        <ul className="toDoList__list">
+        <hr className="to-do-list__separator" />
+        <ul className="to-do-list__list">
           {
             someList.map(ToDoList_li)
           }
