@@ -1,12 +1,10 @@
 import "./styles/App.scss";
 import React, { useState } from "react";
-import trash from '../public/trash.svg'
+import trash from "../public/trash.svg";
 
 type FormProps = {
-  // You also can use type like this React.Dispatch<React.SetStateAction<string[]>>
   onHandleSubmit: (array: (state: string[]) => string[]) => void;
 };
-
 
 const ToDoList_form = (props: FormProps) => {
   const [textInput, setTextInput] = useState<string>("");
@@ -23,7 +21,6 @@ const ToDoList_form = (props: FormProps) => {
     }
     setTextInput("");
   };
-
 
   return (
     <form className="to-do-list__form" name="task-form" onSubmit={handleSubmit}>
@@ -45,26 +42,32 @@ const ToDoList_form = (props: FormProps) => {
 };
 
 type ToDoList_liProps = {
-  task: string,
-  index: number,
-  items: string[],
-  removeItem: (id: number) => void // Исправлено: указан тип параметра id
+  task: string;
+  items: string[];
+  removeItem: (id: number) => void;
 };
 
 const ToDoList_li = (props: ToDoList_liProps): JSX.Element => {
   return (
-    <>{props.items.map((item, index) => (  // Исправлено: добавлено указание на items из props
-      <li className="toDoList__item" key={index}>
-        <input type="checkbox" className="toDoList__chkbox" id={`${props.index}`} />
-        <label htmlFor={`${props.index}`} className="toDoList__task">
-          {item} {/* Исправлено: выводим значение item */}
-        </label>
-        <button className="toDoList__dlt" onClick={() => props.removeItem(props.index)}>
-          {/* Исправлено: передаем props.index вместо item.id */}
-          <img src={trash} alt="" />
-        </button>
-      </li>
-    ))}
+    <>
+      {props.items.map((item, index) => (
+        <li className="to-do-list__item" key={index}>
+          <input
+            type="checkbox"
+            className="to-do-list__chkbox"
+            id={`${index}`}
+          />
+          <label htmlFor={`${index}`} className="to-do-list__task">
+            {item}
+          </label>
+          <button
+            className="to-do-list__dlt"
+            onClick={() => props.removeItem(index)}
+          >
+            <img src={trash} alt="" />
+          </button>
+        </li>
+      ))}
     </>
   );
 };
@@ -73,24 +76,22 @@ function App() {
   const [someList, setSomeList] = useState<string[]>([]);
 
   const removeItem = (id: number) => {
-    setSomeList((prevTaskList: string[]) => prevTaskList.filter((_, index) => index !== id));
-    // Исправлено: используем filter для удаления элемента по индексу
+    setSomeList((prevTaskList: string[]) =>
+      prevTaskList.filter((_, index) => index !== id)
+    );
   };
 
   return (
     <>
-      <div className="toDoList__wrapper">
-				<ToDoList_form onHandleSubmit={setSomeList} />
-        <hr className="toDoList__separator" />
-        <ul className="toDoList__list">
-          <ToDoList_li items={someList} task="" index={0} removeItem={removeItem} />
-          {/* Исправлено: передаем значения для task и index */}
+      <div className="to-do-list__wrapper">
+        <ToDoList_form onHandleSubmit={setSomeList} />
+        <hr className="to-do-list__separator" />
+        <ul className="to-do-list__list">
+          <ToDoList_li items={someList} task="" removeItem={removeItem} />
         </ul>
       </div>
     </>
   );
 }
 
-
 export default App;
-
