@@ -9,7 +9,8 @@ $light: rgb(250, 240, 230);
         display: flex;
         flex-direction: column;
         gap: 5px;
-        width: 33%;
+        width: 100%;
+        max-width: 600px;
         height: 100vh;
         border: 2px solid $grey;
         border-radius: 10px;
@@ -64,6 +65,7 @@ $light: rgb(250, 240, 230);
       display: flex;
       flex-direction: column;
       overflow-y: auto ;
+      height: auto;
     }
 
     &__item {
@@ -72,10 +74,11 @@ $light: rgb(250, 240, 230);
       gap: 5px;
       border-bottom: 2px solid $dark;
       width: 100%;
-      height: 30px;
+      height: fit-content;
       align-items: center;
       padding: 15px 3px;
       user-select: none;
+      
     }
 
     &__item:nth-last-child(1){
@@ -83,11 +86,11 @@ $light: rgb(250, 240, 230);
     }
 
     &__chkbox {
-      background-color: $grey;
+      
     }
     
     &__task {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       word-break: break-all;
       color: $grey;
     }
