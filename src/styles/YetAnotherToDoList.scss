@@ -1,0 +1,109 @@
+$darkest: rgb(53, 47, 68);
+$dark: rgb(92, 84, 112);
+$grey: rgb(185, 180, 199);
+$light: rgb(250, 240, 230);
+
+.another {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    border: 2px solid $grey;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__label {
+    font-weight: 800;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    color: $light;
+    align-self: center;
+  }
+
+  &__input {
+    height: 40px;
+    border: 3px solid $dark;
+    border-radius: 6px;
+    background-color: $grey;
+    font-weight: 500;
+    font-size: 1.8em;
+    color: $darkest;
+    padding: 5px;
+  }
+
+  &__btn {
+    height: 40px;
+    width: 80px;
+    border: 3px solid $dark;
+    background-color: $grey;
+    color: $darkest;
+    font-weight: 700;
+    font-size: 23px;
+    border-radius: 10px;
+  }
+
+  &__separator {
+    color: $light;
+    width: 100%;
+    size: 2px;
+  }
+
+  &__list {
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border-bottom: 2px solid $dark;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    padding: 15px 3px;
+    user-select: none;
+  }
+
+  &__item:nth-last-child(1) {
+    border-bottom: none;
+  }
+
+  &__chkbox {
+  }
+
+  &__task {
+    font-size: 1.8rem;
+    word-break: break-all;
+    color: $grey;
+  }
+
+  &__edit {
+    background: none;
+    height: 24px;
+    margin-left: auto;
+  }
+
+  &__delete {
+    background: none;
+    height: 24px;
+    margin-left: auto;
+    & > img {
+      z-index: 10;
+    }
+  }
+}
