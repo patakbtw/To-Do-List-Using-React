@@ -1,6 +1,6 @@
-import "./styles/ToDoList.scss";
+import "../styles/ToDoList.scss";
 import React, { useState, useEffect } from "react";
-import trash from "../public/trash.svg";
+import trash from "/public/trash.svg";
 
 interface ToDoListTask {
   text: string;
@@ -61,7 +61,6 @@ const ToDoList_li = (props: ToDoList_liProps): JSX.Element => {
             type="checkbox"
             className="to-do-list__chkbox"
             id={`${index}`}
-             
           />
           <label htmlFor={`${index}`} className="to-do-list__task">
             {item}
@@ -80,10 +79,10 @@ const ToDoList_li = (props: ToDoList_liProps): JSX.Element => {
 
 function ToDoList() {
   const [someList, setSomeList] = useState<string[]>([]);
-  const storageKey = 'To-Do List tasks';
+  const storageKey = "To-Do List tasks";
   const saveTasksToLocalStorage = () => {
     window.localStorage.setItem(storageKey, JSON.stringify(someList));
-    console.log('Saved tasks to local storage:', JSON.stringify(someList));
+    console.log("Saved tasks to local storage:", JSON.stringify(someList));
   };
 
   const loadTasksFromLocalStorage = () => {
@@ -92,7 +91,7 @@ function ToDoList() {
       setSomeList(
         (prevTaskList: string[]) => (prevTaskList = JSON.parse(storedTasks))
       );
-      console.log('Loaded tasks from local storage:', JSON.parse(storedTasks));
+      console.log("Loaded tasks from local storage:", JSON.parse(storedTasks));
     }
   };
 
@@ -103,7 +102,7 @@ function ToDoList() {
   useEffect(() => {
     const saveTimer = setTimeout(() => {
       saveTasksToLocalStorage();
-    }, 0); 
+    }, 0);
 
     return () => clearTimeout(saveTimer);
   }, [someList]);
@@ -113,8 +112,6 @@ function ToDoList() {
       prevTaskList.filter((_, index) => index !== id)
     );
   };
-
-
 
   return (
     <>
