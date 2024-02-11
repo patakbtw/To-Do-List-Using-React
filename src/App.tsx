@@ -1,7 +1,11 @@
 import ToDoList from "./ToDoList";
+import YetAnotherToDoList from "./YetAnotherToDoList";
 
 export default function App() {
   return(
-    <ToDoList />
+    <div className="app">
+      <ToDoList />
+      <YetAnotherToDoList />
+    </div>
   )
 }

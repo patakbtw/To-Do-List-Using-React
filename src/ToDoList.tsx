@@ -2,6 +2,11 @@ import "./styles/ToDoList.scss";
 import React, { useState, useEffect } from "react";
 import trash from "../public/trash.svg";
 
+interface ToDoListTask {
+  text: string;
+  checked?: boolean;
+}
+
 type FormProps = {
   onHandleSubmit: (array: (state: string[]) => string[]) => void;
 };
