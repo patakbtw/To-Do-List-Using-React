@@ -56,6 +56,7 @@ const ToDoList_li = (props: ToDoList_liProps): JSX.Element => {
             type="checkbox"
             className="to-do-list__chkbox"
             id={`${index}`}
+             
           />
           <label htmlFor={`${index}`} className="to-do-list__task">
             {item}
@@ -74,7 +75,7 @@ const ToDoList_li = (props: ToDoList_liProps): JSX.Element => {
 
 function ToDoList() {
   const [someList, setSomeList] = useState<string[]>([]);
-  const storageKey = 'dicks';
+  const storageKey = 'To-Do List tasks';
   const saveTasksToLocalStorage = () => {
     window.localStorage.setItem(storageKey, JSON.stringify(someList));
     console.log('Saved tasks to local storage:', JSON.stringify(someList));
