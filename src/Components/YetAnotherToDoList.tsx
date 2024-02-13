@@ -44,29 +44,31 @@ export default function YetAnotherToDoList() {
   }
 
   function handleCheckTask(taskId: number) {
-    setTasks(tasks.map((task: TaskInterface) => {
-      if (task.id === taskId) {
-        task.done = !task.done;
-        return task;
-      } else {
-        return task;
-      }
-    }));
+    setTasks(
+      tasks.map((task: TaskInterface) => {
+        if (task.id === taskId) {
+          task.done = !task.done;
+          return task;
+        } else {
+          return task;
+        }
+      })
+    );
   }
 
   return (
-    <TaskContext.Provider
-      value={{
-        addTask: handleAddTask,
-        editTask: handleEditTask,
-        deleteTask: handleDeleteTask,
-        checkTask: handleCheckTask,
-      }}
-    >
-      <div className="another__wrapper">
+    <div className="another__wrapper">
+      <TaskContext.Provider
+        value={{
+          addTask: handleAddTask,
+          editTask: handleEditTask,
+          deleteTask: handleDeleteTask,
+          checkTask: handleCheckTask,
+        }}
+      >
         <AddTask />
         <TaskList tasks={tasks} />
-      </div>
-    </TaskContext.Provider>
+      </TaskContext.Provider>
+    </div>
   );
 }

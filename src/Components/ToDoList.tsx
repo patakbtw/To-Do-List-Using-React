@@ -28,6 +28,7 @@ const ToDoList_form = (props: FormProps) => {
         New task
       </label>
       <input
+        autoComplete="false"
         placeholder="Add task"
         type="text"
         id="item"
