@@ -6,9 +6,13 @@ export default function AddTask() {
   const { addTask } = useContext(TaskContext);
   return (
     <div className="another__form">
+      <label htmlFor="add_item" className="another__label">
+        New task
+      </label>
       <input
         placeholder="Add task"
         type="text"
+        id="add_item"
         value={text}
         className="another__input"
         onChange={(event) => setText(event.target.value)}
@@ -22,6 +26,7 @@ export default function AddTask() {
       >
         <p>Add</p>
       </button>
+      <hr className="to-do-list__separator" />
     </div>
   );
 }

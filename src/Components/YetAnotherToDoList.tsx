@@ -13,7 +13,7 @@ export interface TaskInterface {
 export default function YetAnotherToDoList() {
   const [tasks, setTasks] = useState<TaskInterface[]>([]);
 
-  let nextId = 0;
+  let nextId = tasks.length;
 
   function handleAddTask(text: string) {
     setTasks([
@@ -40,6 +40,18 @@ export default function YetAnotherToDoList() {
 
   function handleDeleteTask(taskId: number) {
     setTasks(tasks.filter((t) => t.id !== taskId));
+    console.log({ tasks });
+  }
+
+  function handleCheckTask(taskId: number) {
+    setTasks(tasks.map((task: TaskInterface) => {
+      if (task.id === taskId) {
+        task.done = !task.done;
+        return task;
+      } else {
+        return task;
+      }
+    }));
   }
 
   return (
@@ -48,6 +60,7 @@ export default function YetAnotherToDoList() {
         addTask: handleAddTask,
         editTask: handleEditTask,
         deleteTask: handleDeleteTask,
+        checkTask: handleCheckTask,
       }}
     >
       <div className="another__wrapper">
