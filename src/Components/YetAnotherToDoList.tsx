@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/YetAnotherToDoList.scss";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
@@ -26,14 +26,13 @@ export default function YetAnotherToDoList() {
     ]);
   }
 
-  function handleEditTask(task: TaskInterface) {
+  function handleEditTask(taskId: number, newText: string) {
     setTasks(
-      tasks.map((t: TaskInterface) => {
-        if (t.id == task.id) {
-          return task;
-        } else {
-          return t;
+      tasks.map((task: TaskInterface) => {
+        if (task.id === taskId) {
+          task.text = newText;
         }
+        return task;
       })
     );
   }
@@ -48,13 +47,39 @@ export default function YetAnotherToDoList() {
       tasks.map((task: TaskInterface) => {
         if (task.id === taskId) {
           task.done = !task.done;
-          return task;
-        } else {
-          return task;
         }
+        return task;
       })
     );
   }
+
+  const storageKey = "Yet another To-Do List tasks";
+  const saveTasksToLocalStorage = () => {
+    window.localStorage.setItem(storageKey, JSON.stringify(tasks));
+    console.log("Saved tasks to local storage:", JSON.stringify(tasks));
+  };
+
+  const loadTasksFromLocalStorage = () => {
+    const storedTasks = window.localStorage.getItem(storageKey);
+    if (storedTasks) {
+      setTasks(
+        (prevTaskList: TaskInterface[]) => (prevTaskList = JSON.parse(storedTasks))
+      );
+      console.log("Loaded tasks from local storage:", JSON.parse(storedTasks));
+    }
+  };
+
+  useEffect(() => {
+    loadTasksFromLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    const saveTimer = setTimeout(() => {
+      saveTasksToLocalStorage();
+    }, 0);
+
+    return () => clearTimeout(saveTimer);
+  }, [tasks]);
 
   return (
     <div className="another__wrapper">
